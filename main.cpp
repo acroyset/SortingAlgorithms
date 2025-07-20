@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <chrono>
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -219,39 +221,26 @@ float test(void (*func)(std::vector<int>&), const int n, const std::string& name
         arr.push_back(rand()%n);
     }
 
-    return time(func, arr);
+    float t = time(func, arr);
 
-    //std::cout << name << ": " + std::to_string(time(func, arr)) + "ms" << std::endl;
-    //if (!check(arr)) {
-    //    std::cout << "Failed" << std::endl;
-    //}
+    std::cout << name << ": " + std::to_string(t) + "ms" << std::endl;
+    if (!check(arr)) {
+        std::cout << "Failed" << std::endl;
+    }
+
+    return t;
 }
 
 int main() {
-    //test(stdSort, n, "Std::Sort");
-    //test(quickSort, n, "QuickSort");
-    //test(radixSortMSD, n, "RadixSortMSD");
-    //test(mergeSort, n, "MergeSort");
+    int n = 1000000;
+
+    test(stdSort, n, "Std::Sort");
+    test(quickSort, n, "QuickSort");
+    test(radixSortMSD, n, "RadixSortMSD");
+    test(mergeSort, n, "MergeSort");
     //test(binaryInsertionSort, n, "BinaryInsertionSort");
     //test(insertionSort, n, "InsertionSort");
     //test(bubbleSort, n, "BubbleSort");
-
-    std::ofstream file("output.txt");
-
-    float t = 0;
-    int i = 0;
-    while (t < 1000) {
-        t = test(quickSort, i);
-        i+= 10000;
-        for (int i = 0; i < 100; ++i) {
-            file << t << std::endl;
-        }
-        if (i % 100000 == 0) {
-            std::cout << t << std::endl;
-        }
-    }
-
-    file.close();
 
     return 0;
 }
