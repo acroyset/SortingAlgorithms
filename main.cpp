@@ -64,7 +64,8 @@ void radixSortMSD(std::vector<int>& arr) {
 
 int binarySearch(const std::vector<int>& arr, const int item, int low, int high) {
     while (low <= high) {
-        if (const int mid = low + (high - low) / 2; item == arr[mid])
+        const int mid = low + (high - low) / 2;
+        if (item == arr[mid])
             return mid + 1;
         else if (item > arr[mid])
             low = mid + 1;
@@ -116,7 +117,7 @@ void quickSort(std::vector<int>& arr) {
 }
 
 void stdSort(std::vector<int>& arr) {
-    std::ranges::sort(arr);
+    std::sort(arr.begin(), arr.end());
 }
 
 void bubbleSort(std::vector<int>& arr) {
